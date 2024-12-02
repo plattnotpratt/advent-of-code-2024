@@ -21,14 +21,13 @@ function formatData(data){
         if(line[1] === ''){
             continue;
         }
-        listA.push(line[0]);
-        listB.push(line[1]);
+        listA.push(parseInt(line[0]));
+        listB.push(parseInt(line[1]));
     }
     const fData = {
         listA: listA,
         listB: listB,
     }
-    //console.log(fData);
     return fData;
 }
 
@@ -36,17 +35,12 @@ async function  main(){
     let data = await getData("data.txt");
     const listA = data.listA.sort();
     const listB = data.listB.sort();
-    console.log(listA);
     let answer = 0;
     for( let i = 0; i < listB.length; i++){
 
         answer += (Math.max(listA[i],listB[i]) - Math.min(listA[i],listB[i]))
     }
-
     console.log(answer);
-
-
-    
 }
 
 main();
