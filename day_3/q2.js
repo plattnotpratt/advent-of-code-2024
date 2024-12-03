@@ -1,5 +1,5 @@
 const fs = require('node:fs/promises');
-const ddRegex = /(do\(\))\b.+(don't\(\))\b/g;
+const ddRegex = /((do\(\)).+?(don't\(\)))/g;
 const mulRegex = /mul\([0-9]{1,3},[0-9]{1,3}\)/g;
 async function getData(file) {
   try {
@@ -12,25 +12,29 @@ async function getData(file) {
 
 function formatData(data){
     //console.log(data);
+    let instruction = []
+    //stripped newlines as it was causing issues with regex.
+    data = data.replace(/(\r\n|\n|\r)/gm, "");
     const conditional = data.match(ddRegex);
-    console.log(conditional);
-    // const instruction = conditional.match(mulRegex);
-    // return instruction;
+    for(let i = 0; i < conditional.length; i++){
+        instruction.push(conditional[i].match(mulRegex));
+    }
+    return instruction.flat();
 }
 
 function runMulCommand(instruction){
     nums = instruction.match(/[0-9]{1,3}/g)
-    //console.log(nums);
     return parseInt(nums[0]) * parseInt(nums[1]);
 }
 
 async function  main(data){
-    let instructions = await getData("test_data.txt");
-    // let total = 0;
-    // for(let i = 0; i < instructions.length; i++){
-    //     total += runMulCommand(instructions[i]);
-    // }
-    // console.log(total);
+    let instructions = await getData("data.txt");
+    console.log(instructions);
+    let total = 0;
+    for(let i = 0; i < instructions.length; i++){
+        total += runMulCommand(instructions[i]);
+    }
+    console.log(total);
 }
 
 
