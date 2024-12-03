@@ -35,8 +35,8 @@ Feel free to explore, provide feedback, or even share your solutions with me!
 | Day | Challenge | Part 1 Status | Part 2 Status |  
 |-----|-----------|---------------|---------------|  
 | 01  | Day 1: Historian Hysteria | ✅ Completed  | ✅ Completed  |  
-| 02  | Day 2: | ⏳ Pending | ⏳ Pending |  
-| 03  | Day 3: | ⏳ Pending | ⏳ Pending |
+| 02  | Day 2: Red-Nosed Reports | ✅ Completed  | ⏳ Pending |  
+| 03  | Day 3: Mull It Over| ✅ Completed | ✅ Completed  |
 | 04  | Day 4: | ⏳ Pending | ⏳ Pending |
 | 05  | Day 5: | ⏳ Pending | ⏳ Pending |
 | 06  | Day 6: | ⏳ Pending | ⏳ Pending |
