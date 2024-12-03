@@ -10,18 +10,16 @@ async function getData(file) {
 }
 
 function formatData(data){
-    //console.log(data);
     const instruction = data.match(regex);
     return instruction;
 }
 
 function runMulCommand(instruction){
     nums = instruction.match(/[0-9]{1,3}/g)
-    //console.log(nums);
     return parseInt(nums[0]) * parseInt(nums[1]);
 }
 
-async function  main(data){
+async function main(){
     let instructions = await getData("data.txt");
     let total = 0;
     for(let i = 0; i < instructions.length; i++){

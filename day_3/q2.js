@@ -11,7 +11,6 @@ async function getData(file) {
 }
 
 function formatData(data){
-    //console.log(data);
     let instruction = []
     //stripped newlines as it was causing issues with regex.
     data = data.replace(/(\r\n|\n|\r)/gm, "");
@@ -27,9 +26,8 @@ function runMulCommand(instruction){
     return parseInt(nums[0]) * parseInt(nums[1]);
 }
 
-async function  main(data){
+async function main(){
     let instructions = await getData("data.txt");
-    console.log(instructions);
     let total = 0;
     for(let i = 0; i < instructions.length; i++){
         total += runMulCommand(instructions[i]);
