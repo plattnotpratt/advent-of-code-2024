@@ -37,7 +37,7 @@ Feel free to explore, provide feedback, or even share your solutions with me!
 | 01  | Day 1: Historian Hysteria | ✅ Completed  | ✅ Completed  |  
 | 02  | Day 2: Red-Nosed Reports | ✅ Completed  | ⏳ Pending |  
 | 03  | Day 3: Mull It Over| ✅ Completed | ✅ Completed  |
-| 04  | Day 4: | ⏳ Pending | ⏳ Pending |
+| 04  | Day 4: Ceres Search | ✅ Completed | ✅ Completed |
 | 05  | Day 5: | ⏳ Pending | ⏳ Pending |
 | 06  | Day 6: | ⏳ Pending | ⏳ Pending |
 | 07  | Day 7: | ⏳ Pending | ⏳ Pending |

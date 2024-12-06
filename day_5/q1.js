@@ -1,3 +1,5 @@
+// lost data, need to reprogram
+
 const fs = require('node:fs/promises');
 async function getData(file) {
   try {
