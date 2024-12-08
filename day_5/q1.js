@@ -11,49 +11,63 @@ async function getData(file) {
 }
 
 function formatData(data){
-    const xword = [];
-    let rows = data.split('\n');
-    for(let i = 0; i < rows.length; i++){
-      xword.push(rows[i].split(''));
+    let pageOrders = [];
+    let rules = [];
+    const temp = data.split('\n\n');
+    rules = temp[0].split('\n');
+    for(let i = 0; i < rules.length; i++){
+      rules[i] = rules[i].split('|');
+      for(let k = 0 ; k < rules[i].length; k++){
+        rules[i][k] = parseInt(rules[i][k]);
+      }
     }
-    return xword;
+    pageOrders = temp[1].split('\n');
+    for(let i = 0; i < pageOrders.length; i++){
+      pageOrders[i] = pageOrders[i].split(',');
+      for(let k = 0; k < pageOrders[i].length; k++){
+        pageOrders[i][k] = parseInt(pageOrders[i][k]);
+      }
+    }
+    return {pageOrders, rules};
 }
 
-function findXMas(xword){
-  let total = 0;
-  for(let i = 2; i < xword.length; i++){
-    for(let k = 2; k < xword[i].length; k++){
-    
-      // North Check
-      if(xword[i][k] == 'S' && xword[i-2][k] == 'M' && xword[i-2][k-2] == 'M' && xword[i][k-2] == 'S' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // South Check
-      if(xword[i][k] == 'M' && xword[i-2][k] == 'S' && xword[i-2][k-2] == 'S' && xword[i][k-2] == 'M' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // East Check
-      if(xword[i][k] == 'S' && xword[i-2][k] == 'S' && xword[i-2][k-2] == 'M' && xword[i][k-2] == 'M' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // West Check
-      if(xword[i][k] == 'M' && xword[i-2][k] == 'M' && xword[i-2][k-2] == 'S' && xword[i][k-2] == 'S' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
+function pagesInOrder(pageOrder, rule){
+  if(pageOrder.indexOf(rule[0]) >= 0 && pageOrder.indexOf(rule[1]) >= 0){
+    return pageOrder.indexOf(rule[0]) < pageOrder.indexOf(rule[1]);
+  }else{
+    return true
+  }
+}
+
+function getMiddleNumber(pageOrder){
+  return pageOrder[Math.floor(pageOrder.length / 2)]
+}
+
+function checkPageOrder(pageOrder, rules){
+  let check = true
+  for(let i = 0; i < rules.length; i++){
+
+    if(!pagesInOrder(pageOrder, rules[i])){
+      check = false
     }
   }
-  return total;
+  if(check){
+    return getMiddleNumber(pageOrder);
+  }else{
+    return 0;
+  }
 }
 
-function search(xword){
-  return findXMas(xword);
-}
 
 async function main(){
-    let xword = await getData("data.txt");
-    let total = search(xword)
-    console.log(total);
-    
+  let total = 0;
+  let data = await getData("data.txt");
+  for(let i = 0; i < data.pageOrders.length; i++){
+    //console.log(checkPageOrder(data.pageOrders[i], data.rules));
+    total += checkPageOrder(data.pageOrders[i], data.rules);
+  }
+  console.log(total);
+  //console.log(data)  
 }
 main();
 
