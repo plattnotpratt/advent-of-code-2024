@@ -11,48 +11,27 @@ async function getData(file) {
 }
 
 function formatData(data){
-    const xword = [];
+    const grid = [];
     let rows = data.split('\n');
     for(let i = 0; i < rows.length; i++){
-      xword.push(rows[i].split(''));
+      const tempArray = rows[i].split('');
+      for(let k = 0; k < tempArray.length; k++){
+        if(tempArray[k] == '^'){
+          tempArray[k] = {mapElem: tempArray[k], attended: true}
+        }else{
+          tempArray[k] = {mapElem: tempArray[k], attended: false}
+        }
+      }
+      grid.push(tempArray)
     }
-    return xword;
+    return grid;
 }
 
-function findXMas(xword){
-  let total = 0;
-  for(let i = 2; i < xword.length; i++){
-    for(let k = 2; k < xword[i].length; k++){
-    
-      // North Check
-      if(xword[i][k] == 'S' && xword[i-2][k] == 'M' && xword[i-2][k-2] == 'M' && xword[i][k-2] == 'S' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // South Check
-      if(xword[i][k] == 'M' && xword[i-2][k] == 'S' && xword[i-2][k-2] == 'S' && xword[i][k-2] == 'M' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // East Check
-      if(xword[i][k] == 'S' && xword[i-2][k] == 'S' && xword[i-2][k-2] == 'M' && xword[i][k-2] == 'M' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-      // West Check
-      if(xword[i][k] == 'M' && xword[i-2][k] == 'M' && xword[i-2][k-2] == 'S' && xword[i][k-2] == 'S' && xword[i-1][k-1] == 'A'){
-        total ++;
-      }
-    }
-  }
-  return total;
-}
 
-function search(xword){
-  return findXMas(xword);
-}
 
 async function main(){
-    let xword = await getData("data.txt");
-    let total = search(xword)
-    console.log(total);
+    let grid = await getData("test_data.txt");
+    console.log(grid);
     
 }
 main();
